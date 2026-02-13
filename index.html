@@ -24,6 +24,18 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* LUFFY BACKGROUND IMAGE */
+        .luffy-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            width: clamp(200px, 30vw, 400px); /* Responsive size */
+            opacity: 0.6; /* Keeps it subtle behind text */
+            z-index: -1; /* Guarantees it stays behind the quiz */
+            pointer-events: none; /* Allows you to click "through" it */
         }
 
         h1 {
@@ -46,7 +58,10 @@
             color: #333;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             margin-top: 20px;
+            margin-bottom: 40px;
             text-align: center;
+            position: relative;
+            z-index: 10;
         }
 
         .options { display: grid; gap: 10px; margin-top: 20px; }
@@ -149,13 +164,15 @@
 </head>
 <body>
 
+    <img src="luffy.jpg.jpeg" alt="Luffy" class="luffy-bg">
+
     <h1>FIND THE ONE PIECE</h1>
 
     <div class="quiz-container" id="quiz-box">
         <div id="quiz-content">
             <h2 id="question-text">Loading...</h2>
             <div class="options" id="options-container"></div>
-            <p id="feedback"></p>
+            <p id="feedback" style="font-weight: bold; margin-top: 15px;"></p>
         </div>
     </div>
 
@@ -176,8 +193,20 @@
     <script>
         const quizData = [
             { q: "Who is the Captain of the Straw Hats?", o: ["Buggy", "Luffy", "Shanks", "Law"], a: "Luffy" },
-            { q: "What is Luffy's favorite food?", o: ["Salad", "Pizza", "Meat", "Rice"], a: "Meat" },
-            { q: "Which Gear does Luffy use first in Enies Lobby?", o: ["Gear 2", "Gear 4", "Gear 5", "Gear 3"], a: "Gear 2" }
+            { q: "What is Luffy's favorite food?", o: ["Salad", "Pizza", "MINHAJ'S MEAT", "Rice"], a: "MINHAJ'S MEAT" },
+            { q: "Which Gear does Luffy use first in Enies Lobby?", o: ["Gear 2", "Gear 4", "Gear 5", "Gear 3"], a: "Gear 2" },
+            { q: "What is Luffy's favorite place?", o: ["WANO", "THOUSAND SUNNY", "8C", "ENIES LOBBY"], a: "8C" },
+            // Harder Questions
+            { q: "What was Brook's bounty before he 'died'?", o: ["33 Million", "50 Million", "100 Million", "80 Million"], a: "33 Million" },
+            { q: "Who gave Luffy the scar on his chest?", o: ["Blackbeard", "Akainu", "Kaido", "Kizaru"], a: "Akainu" },
+            { q: "What is the name of Zoro's childhood friend?", o: ["Kuina", "Tashigi", "Hiyori", "Nojiko"], a: "Kuina" },
+            { q: "Which Poneglyph tells the location of Pluton?", o: ["Alabasta", "Skypiea", "Fishman Island", "Wano"], a: "Alabasta" },
+            { q: "Who was the first person to wound Kaido?", o: ["Luffy", "Zoro", "Oden", "Whitebeard"], a: "Oden" },
+            { q: "What is the name of Sanji's biological family?", o: ["Charlotte", "Vinsmoke", "Donquixote", "Figarland"], a: "Vinsmoke" },
+            { q: "Which Straw Hat was the first to meet a Warlord?", o: ["Luffy", "Nami", "Zoro", "Sanji"], a: "Zoro" },
+            { q: "How many years did Brook spend alone on his ship?", o: ["25 years", "40 years", "50 years", "10 years"], a: "50 years" },
+            { q: "What is the 'True Name' of the Gomu Gomu no Mi?", o: ["Nika Fruit", "Sun Fruit", "Joy Fruit", "Rubber Myth"], a: "Nika Fruit" },
+            { q: "Which ship did the Straw Hats use before the Thousand Sunny?", o: ["Going Merry", "Oro Jackson", "Red Force", "Victoria Punk"], a: "Going Merry" }
         ];
 
         let currentQ = 0;
@@ -206,9 +235,8 @@
                     } else {
                         finishQuiz();
                     }
-                }, 1000);
+                }, 800);
             } else {
-                // KAIDO APPEARS IMMEDIATELY ON WRONG ANSWER
                 triggerDeath();
             }
         }
