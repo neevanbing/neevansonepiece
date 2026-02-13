@@ -8,7 +8,8 @@
     <style>
         :root {
             --op-gold: #ffcc00;
-            --op-red: #8b0000;
+            --op-red: #a50000; 
+            --op-dark-red: #800000;
             --op-bright-red: #ff0000;
         }
 
@@ -16,7 +17,7 @@
             margin: 0;
             padding: 0;
             background-color: var(--op-red);
-            background-image: radial-gradient(circle, #b30000 0%, #8b0000 100%);
+            background-image: radial-gradient(circle, var(--op-red) 0%, var(--op-dark-red) 100%);
             font-family: 'Open Sans', sans-serif;
             color: white;
             display: flex;
@@ -27,15 +28,15 @@
             position: relative;
         }
 
-        /* LUFFY BACKGROUND IMAGE */
+        /* LUFFY BACKGROUND IMAGE - UPDATED FILENAME IN HTML BELOW */
         .luffy-bg {
             position: fixed;
             right: 0;
             bottom: 0;
-            width: clamp(200px, 30vw, 400px); /* Responsive size */
-            opacity: 0.6; /* Keeps it subtle behind text */
-            z-index: -1; /* Guarantees it stays behind the quiz */
-            pointer-events: none; /* Allows you to click "through" it */
+            width: clamp(200px, 35vw, 450px); 
+            opacity: 0.7; 
+            z-index: -1; 
+            pointer-events: none; 
         }
 
         h1 {
@@ -78,7 +79,6 @@
 
         button:hover { background: var(--op-gold); transform: translateY(-3px); }
 
-        /* KAIDO DEATH SCREEN */
         #death-screen {
             display: none;
             position: fixed;
@@ -118,7 +118,6 @@
             padding: 10px 30px;
         }
 
-        /* TREASURE SECTION */
         #chest-zone {
             display: none;
             flex-direction: column;
@@ -164,7 +163,7 @@
 </head>
 <body>
 
-    <img src="luffy.jpg.jpeg" alt="Luffy" class="luffy-bg">
+    <img src="luffy.jpg.jpeg.png" alt="Luffy Background" class="luffy-bg">
 
     <h1>FIND THE ONE PIECE</h1>
 
