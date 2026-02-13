@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIND THE ONE PIECE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --op-gold: #ffcc00;
+            --op-red: #cc0000;
+            --op-blue: #004466;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.alphacoders.com/132/1328325.png'); /* Epic Ocean/Sky Background */
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: 'Open Sans', sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* The Big Header */
+        h1 {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: var(--op-gold);
+            text-shadow: 5px 5px 0px var(--op-red), 8px 8px 15px rgba(0,0,0,0.5);
+            margin-top: 40px;
+            letter-spacing: 5px;
+            text-align: center;
+        }
+
+        /* Quiz Container */
+        .quiz-container {
+            background: rgba(255, 248, 220, 0.9); /* Parchment color */
+            border: 10px solid #5d4037;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            margin-bottom: 50px;
+        }
+
+        .wanted-header {
+            text-align: center;
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: #5d4037;
+            border-bottom: 2px solid #5d4037;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: 2px solid #5d4037;
+            background: #fff;
+            transition: 0.3s;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: var(--op-gold);
+            transform: scale(1.02);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .jolly-roger {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>FIND THE ONE PIECE</h1>
+
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/af/One_Piece_Jolly_Roger.svg/1200px-One_Piece_Jolly_Roger.svg.png" alt="Jolly Roger" class="jolly-roger">
+
+    <div class="quiz-container">
+        <div class="wanted-header">QUIZ: PROVE YOUR BOUNTY</div>
+        
+        <div id="quiz-content">
+            <div class="question" id="question-text">Loading question...</div>
+            <div class="options" id="options-container"></div>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                q: "Who was the first member to join Luffy's crew?",
+                o: ["Sanji", "Zoro", "Nami", "Usopp"],
+                a: "Zoro"
+            },
+            {
+                q: "What is the name of Luffy's signature Straw Hat original owner?",
+                o: ["Whitebeard", "Gol D. Roger", "Garp", "Ace"],
+                a: "Gol D. Roger"
+            },
+            {
+                q: "Which Devil Fruit did Luffy eat?",
+                o: ["Gomu Gomu no Mi", "Mera Mera no Mi", "Hito Hito no Mi, Model: Nika", "Both A and C"],
+                a: "Both A and C"
+            }
+        ];
+
+        let currentQ = 0;
+
+        function loadQuiz() {
+            const qText = document.getElementById('question-text');
+            const optionsBox = document.getElementById('options-container');
+            const resBox = document.getElementById('result');
+            
+            resBox.innerHTML = "";
+            const currentData = quizData[currentQ];
+            qText.innerText = currentData.q;
+            optionsBox.innerHTML = "";
+
+            currentData.o.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt);
+                optionsBox.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected) {
+            const resBox = document.getElementById('result');
+            if(selected === quizData[currentQ].a) {
+                resBox.innerHTML = "<span style='color: green;'>CORRECT! Your bounty is rising! 🏴‍☠️</span>";
+            } else {
+                resBox.innerHTML = "<span style='color: red;'>WRONG! Back to the East Blue with you!</span>";
+            }
+            
+            setTimeout(() => {
+                currentQ++;
+                if(currentQ < quizData.length) {
+                    loadQuiz();
+                } else {
+                    document.getElementById('quiz-content').innerHTML = "<h2>Quiz Finished! You are ready for the Grand Line!</h2>";
+                }
+            }, 2000);
+        }
+
+        loadQuiz();
+    </script>
+</body>
+</html>
